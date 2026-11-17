@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mapa de salas — Reporte de daños UNIMINUTO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/estilos.css">
+</head>
+
+<body> <!-- Esto es la barrita superior -->
+  <div class="tb"><span>Corporación Universitaria Minuto de Dios · Educación de calidad al alcance de
+      todos</span><span><a href="https://www.uniminuto.edu" target="_blank" rel="noopener">Accede a Mi Campus</a><a
+        href="https://www.uniminuto.edu" target="_blank" rel="noopener">Sitio UNIMINUTO</a></span>
+  </div>
+    <!-- Esto es el menú lateral -->
+  <aside>
+    <div class="brand"><img class="brand-logo" src="/public/images/Uniminuto-horizontal-Colombia.png"
+        alt="UNIMINUTO — Educación de calidad al alcance de todos"></div>
+    <a id="nh" class="on" href="#inicio">Inicio</a><a href="#inicio" data-sc="como">Cómo funciona</a><a href="#inicio"
+      data-sc="mapa">Mapa de salas</a><a id="rep" href="#reportes">Reportes</a><a class="cta" href="#inicio"
+      data-go="mapa">Reportar un daño →</a>
+  </aside>
+  <main id="mapv">
+    <section id="ex">
+      <div class="ex-pin">
+        <div class="ex-img" id="exImg">
+          <div class="ex-txt"><small>UNIMINUTO · Salas de sistemas</small>
+            <h2>Cada equipo, a la vista</h2><a class="ybtn" href="#inicio" data-go="mapa">Reportar un daño →</a>
+          </div>
+        </div>
+        <p class="ex-hint">Desliza para explorar ↓</p>
+      </div>
+    </section>
+    <div class="sech" id="como">
+      <div><span class="eb">01 · Cómo funciona</span>
+        <h2>Reportar un daño en tres pasos</h2>
+        <p>Un proceso simple para que cada falla llegue rápido al equipo de soporte.</p>
+      </div>
+    </div>
+    <section class="par">
+      <div class="par-card">
+        <div class="par-img" data-k="1"></div>
+        <div class="par-cap"><b>1. Ubica el equipo</b><span>Encuentra el PC en el mapa de la sala.</span></div>
+      </div>
+      <div class="par-card">
+        <div class="par-img" data-k="2"></div>
+        <div class="par-cap"><b>2. Reporta el daño</b><span>Cuéntanos qué le pasa en segundos.</span></div>
+      </div>
+      <div class="par-card">
+        <div class="par-img" data-k="3"></div>
+        <div class="par-cap"><b>3. Haz seguimiento</b><span>Mira el estado hasta que quede resuelto.</span></div>
+      </div>
+    </section>
+    <div class="sech" id="mapa">
+      <div><span class="eb">02 · Mapa de salas</span>
+        <h2>Estado de los equipos</h2>
+        <p>Elige una sala y toca un computador para reportar su estado.</p>
+      </div>
+    </div>
+    <div class="top">
+      <div><small id="blk">Bloque A</small>
+        <h1 id="ttl"></h1><small id="meta"></small>
+      </div>
+      <div class="seg" id="rooms" role="tablist"></div><button type="button" class="add-equipment" id="open-equipment">+
+        Agregar equipo</button>
+    </div>
+    <h3 class="sub">Resumen de la sala</h3>
+    <div class="stats" id="stats"></div>
+    <h3 class="sub">Plano y filtros</h3>
+    <div class="bar">
+
+      <select id="secf" aria-label="Sección"></select>
+      <input id="q" type="search" placeholder="Buscar: A-PC05" aria-label="Buscar equipo">
+    </div>
+    <p class="legend"><span><i style="background:var(--ok)">✓</i>Operativo</span><span><i
+          style="background:var(--bad)">!</i>Con daño</span><span><i style="background:var(--rev)">…</i>En
+        revisión</span><span>Toca un equipo para reportar</span></p>
+    <div class="plan" id="plan"></div>
+    <footer class="foot"><span><b>UNIMINUTO</b> · Salas de sistemas</span><span>Sistema de reporte de daños de
+        equipos</span></footer>
+  </main>
+  <main id="repv" hidden>
+    <div class="rtop"><span class="eb">03 · Seguimiento</span>
+      <h1>Reportes</h1><small id="rn"></small>
+    </div>
+    <div class="seg" id="rchips" style="width:fit-content"></div>
+    <div class="rgrid" id="rgrid"></div>
+  </main>
+  <dialog id="dlg">
+    <h2 id="dt"></h2><small id="ds" style="color:var(--mute)"></small>
+    <label>Estado del equipo</label>
+    <div class="opts">
+      <label><input type="radio" name="st" value="ok"> Operativo</label>
+      <label><input type="radio" name="st" value="bad"> Con daño</label>
+      <label><input type="radio" name="st" value="rev"> En revisión</label>
+    </div>
+    <label for="cat">Tipo de problema</label>
+    <select id="cat" style="width:100%">
+      <option>Pantalla / monitor</option>
+      <option>Teclado</option>
+      <option>Mouse</option>
+      <option>No enciende</option>
+      <option>Red / internet</option>
+      <option>Otro</option>
+    </select>
+    <label for="note">¿Qué le pasa? (opcional)</label>
+    <textarea id="note" placeholder="Ej.: no enciende, pantalla con rayas, hace ruido…"></textarea>
+    <div class="act"><button id="cx">Cancelar</button><button class="pri" id="sv">Guardar reporte</button></div>
+  </dialog>
+  <div class="toast" id="toast">Reporte guardado</div>
+  <dialog id="equipment-dialog">
+    <form id="equipment-form">
+      <button id="close-equipment" type="button" aria-label="Cerrar" style="float:right">×</button>
+      <h2>Agregar equipo</h2><small id="equipment-room" style="color:var(--mute)"></small>
+      <label for="equipment-kind">Tipo de equipo</label>
+      <select id="equipment-kind" name="kind" style="width:100%">
+        <option value="computador">Computador</option>
+        <option value="ventilador">Ventilador</option>
+      </select>
+      <label for="equipment-section">Sección</label>
+      <select id="equipment-section" name="section" style="width:100%">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+        <option>D</option>
+        <option>E</option>
+        <option>F</option>
+      </select>
+      <label for="equipment-position">Número</label>
+      <input id="equipment-position" name="position" type="number" min="1" max="99" required placeholder="Ej.: 1"
+        style="width:100%;max-width:none;margin:0">
+      <div class="act"><button id="cancel-equipment" type="button">Cancelar</button><button class="pri"
+          type="submit">Guardar equipo</button></div>
+    </form>
+  </dialog>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script src="/public/js/logica.js" defer></script>
+</body>
+
+</html>
